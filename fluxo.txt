@@ -1,0 +1,159 @@
+Ol�, Seja bem-vindo! Voc� est� no atendimento do grupo S�o Gabriel, em qual das unidades deseja atendimento. Digite o n�mero da op��o desejada abaixo:
+
+MENU PRINCIPAL:
+1 - Arcoverde
+ 1.1 - Agendamento de consultas/exames
+   1.2 - Cart�o S�o Gabriel (Refer�ncia cruzada)
+   1.3 - 2 via de boleto 
+       1.3.1 - Cart�o S�o Gabriel - Segunda via de boleto(Refer�ncia cruzada)
+   1.4 - Guia M�dico (Consulte o guia m�dico atrav�s desse link: https://www.clinicasaogabriel.com/guia-medico)
+   1.5 - Falar com atendente
+   1.0 - Retornar ao menu anterior
+   
+   
+2 - Belo Jardim
+    2.1 - Agendamento de consultas/exames
+   2.2 - Cart�o S�o Gabriel (Refer�ncia cruzada)
+   2.3 - 2 via de boleto 
+       1.3.1 - Cart�o S�o Gabriel - Segunda via de boleto(Refer�ncia cruzada)
+   2.4 - Guia M�dico (Consulte o guia m�dico atrav�s desse link: https://www.clinicasaogabriel.com/guia-medico)
+   2.5 - Falar com atendente
+   2.0 - Retornar ao menu anterior
+   
+
+3 - Bu�que
+    3.1 - Falar com atendente
+   3.2 - Guia M�dico (Consulte o guia m�dico atrav�s desse link: https://www.clinicasaogabriel.com/guia-medico)
+   3.3 - Falar com atendente
+   9.0 - Retornar ao menu anterior
+   
+   
+4 - Caruaru
+   4.1 - Clinica S�o Gabriel
+       4.1.1 - Agendamento de Consultas
+       4.1.2 - Agendamento de Consultas (Dr Oscar Barreto)
+       4.1.3 - Endoscopia e Colonoscopia
+       4.1.4 - Resultado de exames
+       4.1.5 - Falar com atendente
+       4.1.0 - Retornar ao menu anterior
+    
+   4.2 - Cart�o S�o Gabriel
+       4.2.1 - Fa�a seu cart�o
+       4.2.2 - 2 via de Boleto
+             4.2.2.1 - Para agilizar seu atendimento informe seu CPF ou n�mero do contrato.
+       4.2.3 - Guia M�dico (Consulte o guia m�dico atrav�s desse link: https://www.clinicasaogabriel.com/guia-medico)
+       4.2.4 - Or�amento / Consultar valores 
+             4.2.4.1 - Para agilizar seu atendimento envie a requisi��o m�dica.
+       4.2.5 - Meu IRPF
+             4.2.5.1 - Para agilizar seu atendimento informe seu CPF ou n�mero do contrato.
+     4.2.6 - Credenciamento M�dico
+       4.2.0 - Retornar ao menu anterior
+   
+   4.3 - Laborat�rio
+     4.3.1 - Or�amentos com cart�o S�o Gabriel
+             4.3.1.1 - Cart�o S�o Gabriel (Refer�ncia cruzada)
+       4.3.2 - Or�amentos Particulares
+       4.3.3 - Resultados de exames.
+       4.3.4 - Outros
+             4.3.4.1 - Coletas Domiciliares
+             4.3.4.1 - Solicita��o de Urg�ncia nos laudos.
+             4.3.4.1 - Falar com atendente
+             4.3.4.0 - Retornar ao menu anterior
+       4.3.0 - Retornar ao menu anterior
+   
+   4.4 - Exames Imagens (Rx, Tomografia, Ultrassonografia)
+       4.4.1 - Biopsias
+       4.4.2 - Exames Cardiol�gicos
+       4.4.3 - Pun��es
+       4.4.4 - Neuromiografia
+       4.4.5 - Ultrassonografia/RX
+       4.4.6 - Retornar ao menu anterior
+  
+   4.5 - Hospital
+       4.5.1 - Recep��o
+             4.5.1.1 - Clinica m�dica/ Ortopedia
+             4.5.1.2 - Exames de imagens (Tomografia/RX)
+             4.5.1.3 - Exames Laboratoriais
+             4.5.1.4 - Or�amentos de cirurgias
+             4.5.1.5 - Cadastro de Guias
+             4.5.1.6 - Falar com atendente
+             4.5.1.0 - Retornar ao menu anterior
+       4.5.2 - Marca��o de consultas eletivas
+             4.5.2.1 - Para agilizar seu atendimento, por favor, informe seu nome completo.
+       4.5.3 - Autoriza��es de conv�nios
+             4.5.3.1 - Cirurgias
+                     4.5.3.1.1 - Para agilizar seu atendimento, por favor, informe seu nome completo, o conv�nio e o nome do m�dico solicitante.
+             4.5.3.2 - Infiltra��es 
+                     4.5.3.2.1 - Para agilizar seu atendimento, por favor, informe seu nome completo, o conv�nio e o nome do m�dico solicitante.
+             4.5.3.3 - Falar com atendente
+             4.5.3.0 - Retornar ao menu anterior
+       4.5.4 - Financeiro
+             4.5.4.1 - Valores de contas � pagar
+             4.5.4.2 - Nota Fiscal (Meu IRPF)
+             4.5.4.3 - Valores de Procedimentos
+             4.5.4.4 - Falar com Atendente
+             4.5.4.0 - Retornar ao menu anterior
+       4.5.5 - Prontu�rio DPVAT
+             4.5.5.1 - Receber documento de solicita��o de Prontu�rio M�dico
+                     4.5.5.1.1 - Clique no link para baixar o arquivo: https://bitily.me/MazFH
+       4.5.6 - Documenta��o para reembolso
+             4.5.6.1 - Receber documento de solicita��o de Prontu�rio M�dico
+                     4.5.6.1.1 - Clique no link para baixar o arquivo: https://bitily.me/MazFH
+
+       4.5.7 - Falar com atendente
+       4.5.0 - Retornar ao menu anterior
+   4.6 - Fisioterapia
+       4.6.1 - Falar com atendente
+       4.6.0 - Retornar ao menu anterior
+   4.7 - Remo��o (Ambul�ncia)
+     4.7.1 - Falar com atendente
+       4.7.0 - Retornar ao menu anterior
+   4.0 - Retornar ao menu anterior
+
+5 - Garanhuns
+    5.1 - Agendamento de consultas/exames
+   5.2 - Cart�o S�o Gabriel (Refer�ncia cruzada)
+   5.3 - 2 via de boleto 
+       5.3.1 - Cart�o S�o Gabriel - Segunda via de boleto(Refer�ncia cruzada)
+   5.4 - Guia M�dico (Consulte o guia m�dico atrav�s desse link: https://www.clinicasaogabriel.com/guia-medico)
+   5.5 - Falar com atendente
+   5.0 - Retornar ao menu anterior
+   
+6 - Gravat�
+    6.1 - Agendamento de consultas/exames
+   6.2 - Cart�o S�o Gabriel (Refer�ncia cruzada)
+   6.3 - 2 via de boleto 
+       6.3.1 - Cart�o S�o Gabriel - Segunda via de boleto(Refer�ncia cruzada)
+   6.4 - Guia M�dico (Consulte o guia m�dico atrav�s desse link: https://www.clinicasaogabriel.com/guia-medico)
+   6.5 - Falar com atendente
+   6.0 - Retornar ao menu anterior
+   
+
+7 - Pesqueira
+    7.1 - Agendamento de consultas/exames
+   7.2 - Cart�o S�o Gabriel (Refer�ncia cruzada)
+   7.3 - 2 via de boleto 
+       7.3.1 - Cart�o S�o Gabriel - Segunda via de boleto(Refer�ncia cruzada)
+   7.4 - Guia M�dico (Consulte o guia m�dico atrav�s desse link: https://www.clinicasaogabriel.com/guia-medico)
+   7.5 - Falar com atendente
+   7.0 - Retornar ao menu anterior
+   
+
+8 - Santa Cruz
+    8.1 - Agendamento de consultas/exames
+   8.2 - Cart�o S�o Gabriel (Refer�ncia cruzada)
+   8.3 - 2 via de boleto 
+       8.3.1 - Cart�o S�o Gabriel - Segunda via de boleto(Refer�ncia cruzada)
+   8.4 - Guia M�dico (Consulte o guia m�dico atrav�s desse link: https://www.clinicasaogabriel.com/guia-medico)
+   8.5 - Falar com atendente
+   8.0 - Retornar ao menu anterior
+   
+   
+9 - Toritama
+    9.1 - Agendamento de consultas/exames
+   9.2 - Cart�o S�o Gabriel (Refer�ncia cruzada)
+   9.3 - 2 via de boleto 
+       9.3.1 - Cart�o S�o Gabriel - Segunda via de boleto(Refer�ncia cruzada)
+   9.4 - Guia M�dico (Consulte o guia m�dico atrav�s desse link: https://www.clinicasaogabriel.com/guia-medico)
+   9.5 - Falar com atendente
+   9.0 - Retornar ao menu anterior
