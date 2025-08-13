@@ -4,3 +4,4 @@ Flask-SocketIO
 python-dotenv
 twilio
 eventlet
+gunicorn==21.2.0
