@@ -3,7 +3,7 @@ services:
     name: flask-chatbot
     env: python
     buildCommand: cd frontend && npm install && npm run build && cd .. && pip install -r requirements.txt
-    startCommand: gunicorn -c gunicorn_config.py app:app
+    startCommand: gunicorn wsgi_app:app
     envVars:
       - key: FLASK_SECRET_KEY
         generateValue: true
