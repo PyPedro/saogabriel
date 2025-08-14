@@ -1,6 +1,7 @@
 Flask>=2.0
 Flask-Session
 Flask-SocketIO
+Flask-CORS
 python-dotenv
 twilio
 eventlet
