@@ -1,29 +1,19 @@
-from flask import Blueprint, request, session, current_app
+from flask import Blueprint, request
 from twilio.twiml.messaging_response import MessagingResponse
-from datetime import datetime
-from flask_socketio import emit
-import time
-import re
 
 twilio_bp = Blueprint('twilio_bp', __name__)
 
 @twilio_bp.route('/whatsapp', methods=['POST'])
 def whatsapp_webhook():
-    menu_tree = current_app.config['MENU_TREE']
-    from_number = request.form.get('From')
-    body = request.form.get('Body', '').strip().lower()
-    conv_id = from_number
-    
-    # Responde ao "oi" inicial
-    if body in ['oi', 'olá', 'ola', 'hello', 'hi']:
-        resp = MessagingResponse()
-        resp.message("Olá! Bem-vindo ao atendimento automático.\n\n" + 
-                    "Escolha uma opção:\n" +
-                    "1 - Atendimento\n" +
-                    "2 - Horários\n" +
-                    "3 - Localização\n" +
-                    "4 - Falar com atendente")
-        return str(resp)
+    # Cria resposta padrão com menu para qualquer mensagem recebida
+    resp = MessagingResponse()
+    resp.message("Olá! Bem-vindo ao atendimento automático.\n\n" + 
+                "Escolha uma opção:\n" +
+                "1 - Atendimento\n" +
+                "2 - Horários\n" +
+                "3 - Localização\n" +
+                "4 - Falar com atendente")
+    return str(resp)
     sess = session.setdefault(from_number, {'path': [], 'conv_id': conv_id, 'from': from_number})
     path = sess['path']
     # Navegação do menu
