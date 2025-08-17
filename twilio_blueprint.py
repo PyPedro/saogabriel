@@ -189,13 +189,15 @@ def whatsapp_webhook():
         if path == ['4']:
             if option == '1':  # Clínica São Gabriel
                 path.append(option)  # Adiciona a opção ao caminho
-                return str(MessagingResponse().message(
-                    "1-Agendamento de Consultas\n" +
-                    "2-Agendamento de Consultas (Dr Oscar Barreto)\n" +
-                    "3-Endoscopia e Colonoscopia\n" +
-                    "4-Resultado de Exames\n" +
-                    "5-Falar com Atendente\n" +
+                menu = [
+                    "1-Agendamento de Consultas",
+                    "2-Agendamento de Consultas (Dr Oscar Barreto)",
+                    "3-Endoscopia e Colonoscopia", 
+                    "4-Resultado de Exames",
+                    "5-Falar com Atendente",
                     "0-Retornar ao menu anterior"
+                ]
+                return str(MessagingResponse().message("\n".join(menu)
                 ))
             elif option == '2':  # Cartão São Gabriel
                 path.append(option)
