@@ -156,11 +156,36 @@ def whatsapp_webhook():
     path = user_session['path']
     
     # Reinicia navegação se solicitado
-    if body.lower() in ['menu', 'start', 'iniciar', 'voltar', '0']:
+    if body.lower() in ['menu', 'start', 'iniciar']:
         path.clear()
         resp = MessagingResponse()
         resp.message(get_menu_message([]))
         return str(resp)
+    
+    # Retorna ao menu anterior
+    if body == '0' or body.lower() == 'voltar':
+        if path:
+            path.pop()  # Remove o último nível do caminho
+            resp = MessagingResponse()
+            if not path:
+                resp.message(get_menu_message([]))  # Volta ao menu principal
+            else:
+                option = path[-1]  # Pega a última opção do caminho
+                # Simula a seleção da opção para mostrar o menu correto
+                if len(path) == 1:
+                    resp.message(get_menu_message(path))
+                else:
+                    # Reprocessa a última opção para mostrar o submenu correto
+                    body_save = body
+                    body = option
+                    option = get_option_by_text(body)
+                    resp = MessagingResponse()
+                    if len(path) == 2 and path[0] == '4':
+                        # Reprocessa o submenu de Caruaru
+                        path.pop()  # Remove temporariamente para reprocessar
+                        if re.match(r'^\d+$', option):
+                            return whatsapp_webhook()  # Reprocessa com a opção anterior
+            return str(resp)
     
     # Processa entrada do usuário (número ou texto)
     option = get_option_by_text(body)
@@ -174,7 +199,142 @@ def whatsapp_webhook():
     
     # Processa opções dos submenus
     if re.match(r'^\d+$', option) and path:
-        # Por enquanto só processa o primeiro nível de submenus
+        # Submenus de Caruaru
+        if path == ['4']:
+            if option == '1':  # Clínica São Gabriel
+                path.append(option)
+                return str(MessagingResponse().message("\n".join([
+                    "1️⃣ Agendamento de Consultas",
+                    "2️⃣ Agendamento de Consultas (Dr Oscar Barreto)",
+                    "3️⃣ Endoscopia e Colonoscopia",
+                    "4️⃣ Resultado de exames",
+                    "5️⃣ Falar com atendente",
+                    "0️⃣ Retornar ao menu anterior"
+                ])))
+            elif option == '2':  # Cartão São Gabriel
+                path.append(option)
+                return str(MessagingResponse().message("\n".join([
+                    "1️⃣ Faça seu cartão",
+                    "2️⃣ 2ª via de Boleto",
+                    "3️⃣ Guia Médico",
+                    "4️⃣ Orçamento / Consultar valores",
+                    "5️⃣ Meu IRPF",
+                    "6️⃣ Credenciamento Médico",
+                    "0️⃣ Retornar ao menu anterior"
+                ])))
+            elif option == '3':  # Laboratório
+                path.append(option)
+                return str(MessagingResponse().message("\n".join([
+                    "1️⃣ Orçamentos com cartão São Gabriel",
+                    "2️⃣ Orçamentos Particulares",
+                    "3️⃣ Resultados de exames",
+                    "4️⃣ Outros",
+                    "0️⃣ Retornar ao menu anterior"
+                ])))
+            elif option == '4':  # Exames Imagens
+                path.append(option)
+                return str(MessagingResponse().message("\n".join([
+                    "1️⃣ Biopsias",
+                    "2️⃣ Exames Cardiológicos",
+                    "3️⃣ Punções",
+                    "4️⃣ Neuromiografia",
+                    "5️⃣ Ultrassonografia/RX",
+                    "0️⃣ Retornar ao menu anterior"
+                ])))
+            elif option == '5':  # Hospital
+                path.append(option)
+                return str(MessagingResponse().message("\n".join([
+                    "1️⃣ Recepção",
+                    "2️⃣ Marcação de consultas eletivas",
+                    "3️⃣ Autorizações de convênios",
+                    "4️⃣ Financeiro",
+                    "5️⃣ Prontuário DPVAT",
+                    "6️⃣ Documentação para reembolso",
+                    "7️⃣ Falar com atendente",
+                    "0️⃣ Retornar ao menu anterior"
+                ])))
+            elif option == '6':  # Fisioterapia
+                path.append(option)
+                return str(MessagingResponse().message("\n".join([
+                    "1️⃣ Falar com atendente",
+                    "0️⃣ Retornar ao menu anterior"
+                ])))
+            elif option == '7':  # Remoção (Ambulância)
+                path.append(option)
+                return str(MessagingResponse().message("\n".join([
+                    "1️⃣ Falar com atendente",
+                    "0️⃣ Retornar ao menu anterior"
+                ])))
+        
+        # Submenus do nível 2 de Caruaru
+        elif len(path) == 2 and path[0] == '4':
+            if path[1] == '1':  # Submenu Clínica São Gabriel
+                if option in ['1', '2', '3', '4', '5']:
+                    return str(MessagingResponse().message("Aguarde, você será atendido em instantes..."))
+            elif path[1] == '2':  # Submenu Cartão São Gabriel
+                if option == '2':  # 2ª via de Boleto
+                    return str(MessagingResponse().message("Para agilizar seu atendimento informe seu CPF ou número do contrato."))
+                elif option == '4':  # Orçamento / Consultar valores
+                    return str(MessagingResponse().message("Para agilizar seu atendimento envie a requisição médica."))
+                elif option == '5':  # Meu IRPF
+                    return str(MessagingResponse().message("Para agilizar seu atendimento informe seu CPF ou número do contrato."))
+            elif path[1] == '3':  # Submenu Laboratório
+                if option == '4':  # Outros
+                    path.append(option)
+                    return str(MessagingResponse().message("\n".join([
+                        "1️⃣ Coletas Domiciliares",
+                        "2️⃣ Solicitação de Urgência nos laudos",
+                        "3️⃣ Falar com atendente",
+                        "0️⃣ Retornar ao menu anterior"
+                    ])))
+            elif path[1] == '5':  # Submenu Hospital
+                if option == '1':  # Recepção
+                    path.append(option)
+                    return str(MessagingResponse().message("\n".join([
+                        "1️⃣ Clinica médica/ Ortopedia",
+                        "2️⃣ Exames de imagens (Tomografia/RX)",
+                        "3️⃣ Exames Laboratoriais",
+                        "4️⃣ Orçamentos de cirurgias",
+                        "5️⃣ Cadastro de Guias",
+                        "6️⃣ Falar com atendente",
+                        "0️⃣ Retornar ao menu anterior"
+                    ])))
+                elif option == '2':  # Marcação de consultas eletivas
+                    return str(MessagingResponse().message("Para agilizar seu atendimento, por favor, informe seu nome completo."))
+                elif option == '3':  # Autorizações de convênios
+                    path.append(option)
+                    return str(MessagingResponse().message("\n".join([
+                        "1️⃣ Cirurgias",
+                        "2️⃣ Infiltrações",
+                        "3️⃣ Falar com atendente",
+                        "0️⃣ Retornar ao menu anterior"
+                    ])))
+                elif option == '4':  # Financeiro
+                    path.append(option)
+                    return str(MessagingResponse().message("\n".join([
+                        "1️⃣ Valores de contas à pagar",
+                        "2️⃣ Nota Fiscal (Meu IRPF)",
+                        "3️⃣ Valores de Procedimentos",
+                        "4️⃣ Falar com Atendente",
+                        "0️⃣ Retornar ao menu anterior"
+                    ])))
+                elif option == '5':  # Prontuário DPVAT
+                    return str(MessagingResponse().message("\n".join([
+                        "Receber documento de solicitação de Prontuário Médico",
+                        "Clique no link para baixar o arquivo: https://bitily.me/MazFH"
+                    ])))
+                elif option == '6':  # Documentação para reembolso
+                    return str(MessagingResponse().message("\n".join([
+                        "Receber documento de solicitação de Prontuário Médico",
+                        "Clique no link para baixar o arquivo: https://bitily.me/MazFH"
+                    ])))
+        
+        # Submenus do nível 3 de Caruaru
+        elif len(path) == 3 and path[0] == '4':
+            if path[1] == '5' and path[2] == '3':  # Hospital -> Autorizações de convênios
+                if option in ['1', '2']:  # Cirurgias ou Infiltrações
+                    return str(MessagingResponse().message("Para agilizar seu atendimento, por favor, informe seu nome completo, o convênio e o nome do médico solicitante."))
+
         resp = MessagingResponse()
         resp.message("Em desenvolvimento. Digite 0 para voltar ao menu principal.")
         return str(resp)
