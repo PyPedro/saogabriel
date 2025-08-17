@@ -6,3 +6,5 @@ python-dotenv
 twilio
 eventlet
 gunicorn==21.2.0
+requests
+colorama
