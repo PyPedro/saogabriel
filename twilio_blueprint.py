@@ -3,7 +3,7 @@ from twilio.twiml.messaging_response import MessagingResponse
 import re
 import time
 
-twilio_bp = Blueprint('twilio_bp', __name__)
+twilio_bp = Blueprint('twilio_bp', __name__, url_prefix='')
 
 def navigate_menu(menu_tree, path):
     """Navega pela árvore do menu e retorna o nó atual"""

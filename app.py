@@ -22,4 +22,7 @@ app.socketio = socketio
 menu_tree = parse_fluxo(os.path.join(os.path.dirname(__file__), 'fluxo.txt'))
 app.config['MENU_TREE'] = menu_tree
 
-app.register_blueprint(twilio_bp)
+app.register_blueprint(twilio_bp, url_prefix='')
+
+if __name__ == '__main__':
+    socketio.run(app, debug=True)

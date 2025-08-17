@@ -30,7 +30,8 @@ def main():
     phone_number = "whatsapp:+5581999999999"
     
     # URL do webhook (local ou Render)
-    webhook_url = "https://saogabriel.onrender.com/whatsapp/webhook"
+    webhook_url = os.getenv('WEBHOOK_URL', 'http://localhost:5000/whatsapp/webhook')
+    print(f"{Fore.YELLOW}Conectando ao webhook: {webhook_url}{Style.RESET_ALL}\n")
     
     # Primeira mensagem para iniciar
     response = requests.post(webhook_url, 
