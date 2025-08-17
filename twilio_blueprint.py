@@ -5,48 +5,12 @@ import time
 
 twilio_bp = Blueprint('twilio_bp', __name__, url_prefix='')
 
-def get_option_by_text(menu_tree, text):
-    """Encontra a opção do menu pelo texto ou número"""
-    text = text.lower().strip()
-    
-    # Mapeamento de textos para números
-    text_to_number = {
-        'arcoverde': '1',
-        'belo jardim': '2',
-        'buíque': '3',
-        'caruaru': '4',
-        'garanhuns': '5',
-        'gravatá': '6',
-        'pesqueira': '7',
-        'santa cruz': '8',
-        'toritama': '9'
-    }
-    
-    if text in text_to_number:
-        return text_to_number[text]
-    return text
-
-def navigate_menu(menu_tree, path):
-    """Navega pela árvore do menu e retorna o nó atual"""
-    current = menu_tree
-    for p in path:
-        if p in current:
-            current = current[p]
-        else:
-            return None
-    return current
-
-def format_menu_options(options):
-    """Formata as opções do menu em ordem numérica"""
-    sorted_options = sorted(options.items(), key=lambda x: [int(n) for n in x[0].split('.')])
-    return [f"{k}-{v['text']}" for k, v in sorted_options]
-
-def get_menu_message(menu_tree, current_path):
+def get_menu_message(current_path):
     """Gera a mensagem do menu com as opções disponíveis"""
-    message = []
     
-    if not current_path:  # Menu principal
-        message.extend([
+    # Menu principal
+    if not current_path:
+        return "\n".join([
             "Olá, Seja bem-vindo! Você está no atendimento do grupo São Gabriel, em qual das unidades deseja atendimento. Digite o número da opção desejada abaixo:",
             "",
             "1-Arcoverde",
@@ -59,32 +23,109 @@ def get_menu_message(menu_tree, current_path):
             "8-Santa Cruz",
             "9-Toritama"
         ])
-    else:
-        current_node = navigate_menu(menu_tree, current_path)
-        if current_node and isinstance(current_node, dict):
-            if 'text' in current_node:
-                message.append(current_node['text'])
-                message.append("")
-            
-            # Encontra as opções diretas deste nível
-            prefix = current_path[-1] + '.' if current_path else ''
-            next_level = {}
-            for k, v in menu_tree.items():
-                if k.startswith(prefix) and k.count('.') == prefix.count('.') + 1:
-                    next_level[k] = v
-            
-            if next_level:
-                message.extend(format_menu_options(next_level))
-            
-            # Adiciona opção de voltar apenas para submenus
-            message.extend([
-                "",
-                "0 - Voltar ao menu principal"
-            ])
     
-    return "\n".join(message)
+    # Menu de Arcoverde
+    if len(current_path) == 1 and current_path[0] == '1':
+        return "\n".join([
+            "1-Agendamento de consultas/exames",
+            "2-Cartão São Gabriel",
+            "3-2ª via de boleto",
+            "4-Guia Médico",
+            "5-Falar com atendente",
+            "0-Retornar ao menu principal"
+        ])
+    
+    # Menu de Belo Jardim
+    if len(current_path) == 1 and current_path[0] == '2':
+        return "\n".join([
+            "1-Agendamento de consultas/exames",
+            "2-Cartão São Gabriel",
+            "3-2ª via de boleto",
+            "4-Guia Médico",
+            "5-Falar com atendente",
+            "0-Retornar ao menu principal"
+        ])
+    
+    # Menu de Buíque
+    if len(current_path) == 1 and current_path[0] == '3':
+        return "\n".join([
+            "1-Falar com atendente",
+            "2-Guia Médico",
+            "3-Falar com atendente",
+            "0-Retornar ao menu principal"
+        ])
+    
+    # Menu de Caruaru
+    if len(current_path) == 1 and current_path[0] == '4':
+        return "\n".join([
+            "1-Clinica São Gabriel",
+            "2-Cartão São Gabriel",
+            "3-Laboratório",
+            "4-Exames Imagens (Rx, Tomografia, Ultrassonografia)",
+            "5-Hospital",
+            "6-Fisioterapia",
+            "7-Remoção (Ambulância)",
+            "0-Retornar ao menu principal"
+        ])
+    
+    # Menu de Garanhuns
+    if len(current_path) == 1 and current_path[0] == '5':
+        return "\n".join([
+            "1-Agendamento de consultas/exames",
+            "2-Cartão São Gabriel",
+            "3-2ª via de boleto",
+            "4-Guia Médico",
+            "5-Falar com atendente",
+            "0-Retornar ao menu principal"
+        ])
+    
+    # Menu de Gravatá
+    if len(current_path) == 1 and current_path[0] == '6':
+        return "\n".join([
+            "1-Agendamento de consultas/exames",
+            "2-Cartão São Gabriel",
+            "3-2ª via de boleto",
+            "4-Guia Médico",
+            "5-Falar com atendente",
+            "0-Retornar ao menu principal"
+        ])
+    
+    # Menu de Pesqueira
+    if len(current_path) == 1 and current_path[0] == '7':
+        return "\n".join([
+            "1-Agendamento de consultas/exames",
+            "2-Cartão São Gabriel",
+            "3-2ª via de boleto",
+            "4-Guia Médico",
+            "5-Falar com atendente",
+            "0-Retornar ao menu principal"
+        ])
+    
+    # Menu de Santa Cruz
+    if len(current_path) == 1 and current_path[0] == '8':
+        return "\n".join([
+            "1-Agendamento de consultas/exames",
+            "2-Cartão São Gabriel",
+            "3-2ª via de boleto",
+            "4-Guia Médico",
+            "5-Falar com atendente",
+            "0-Retornar ao menu principal"
+        ])
+    
+    # Menu de Toritama
+    if len(current_path) == 1 and current_path[0] == '9':
+        return "\n".join([
+            "1-Agendamento de consultas/exames",
+            "2-Cartão São Gabriel",
+            "3-2ª via de boleto",
+            "4-Guia Médico",
+            "5-Falar com atendente",
+            "0-Retornar ao menu principal"
+        ])
+    
+    return "Opção inválida. Digite 0 para voltar ao menu principal."
 
-def get_option_by_text(menu_tree, text):
+def get_option_by_text(text):
     """Encontra a opção do menu pelo texto ou número"""
     text = text.lower().strip()
     
@@ -107,7 +148,6 @@ def get_option_by_text(menu_tree, text):
 
 @twilio_bp.route('/whatsapp/webhook', methods=['POST'])
 def whatsapp_webhook():
-    menu_tree = current_app.config['MENU_TREE']
     from_number = request.form.get('From', '')
     body = request.form.get('Body', '').strip()
     
@@ -119,73 +159,32 @@ def whatsapp_webhook():
     if body.lower() in ['menu', 'start', 'iniciar', 'voltar', '0']:
         path.clear()
         resp = MessagingResponse()
-        resp.message(get_menu_message(menu_tree, []))
+        resp.message(get_menu_message([]))
         return str(resp)
     
     # Processa entrada do usuário (número ou texto)
-    option = get_option_by_text(menu_tree, body)
+    option = get_option_by_text(body)
     
-    if option == '1':  # Arcoverde
-        path[:] = ['1']  # Limpa o caminho e define como Arcoverde
+    # Se for uma opção válida do menu principal (1-9)
+    if re.match(r'^[1-9]$', option):
+        path[:] = [option]  # Limpa o caminho e define a nova opção
         resp = MessagingResponse()
-        resp.message(get_menu_message(menu_tree, path))
+        resp.message(get_menu_message(path))
         return str(resp)
     
-    # Processa outras opções
-    if re.match(r'^\d+(?:\.\d+)*$', option):
-        if not path:  # No menu principal
-            if option in menu_tree:
-                path.append(option)
-        else:
-            # Adiciona a nova opção ao caminho atual
-            full_option = f"{path[-1]}.{option}"
-            if full_option in menu_tree:
-                path.append(full_option)
+    # Processa opções dos submenus
+    if re.match(r'^\d+$', option) and path:
+        # Por enquanto só processa o primeiro nível de submenus
+        resp = MessagingResponse()
+        resp.message("Em desenvolvimento. Digite 0 para voltar ao menu principal.")
+        return str(resp)
     
-    # Gera resposta
+    # Se chegou aqui, é uma opção inválida
     resp = MessagingResponse()
-    resp.message(get_menu_message(menu_tree, path))
-    
-    # Emite evento SocketIO para o dashboard
-    current_app.socketio.emit('newMessage', {
-        'conv_id': from_number,
-        'from': from_number,
-        'body': body,
-        'timestamp': int(time.time())
-    })
-    
-    return str(resp)
-    
-    # Processa entrada numérica (navegação do menu)
-    if re.match(r'^\d+(?:\.\d+)*$', body):
-        new_path = []
-        valid_option = False
-        
-        if not path:  # No menu principal
-            if body in menu_tree:
-                new_path = [body]
-                valid_option = True
-        else:
-            # Constrói o novo caminho baseado no atual
-            current = path[-1]
-            next_option = f"{current}.{body}"
-            
-            # Verifica se a opção existe no menu
-            if next_option in menu_tree:
-                new_path = path + [next_option]
-                valid_option = True
-        
-        resp = MessagingResponse()
-        if valid_option:
-            path[:] = new_path  # Atualiza o caminho na sessão
-            resp.message(get_menu_message(menu_tree, path))
-        else:
-            resp.message("Opção inválida. Digite 0 para voltar ao menu principal.")
+    if not path:
+        resp.message(get_menu_message([]))  # Mostra menu principal
     else:
-        # Mensagem não reconhecida
-        resp = MessagingResponse()
-        resp.message("Por favor, escolha uma opção do menu digitando o número correspondente.\n\n" + 
-                    get_menu_message(menu_tree, path))
+        resp.message(get_menu_message(path))  # Mostra menu atual
     
     # Emite evento SocketIO para o dashboard
     current_app.socketio.emit('newMessage', {
