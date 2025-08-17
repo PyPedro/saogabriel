@@ -26,11 +26,18 @@ def get_menu_message(menu_tree, current_path):
     
     if not current_path:  # Menu principal
         message.extend([
-            "Olá, Seja bem-vindo! Você está no atendimento do grupo São Gabriel, em qual das unidades deseja atendimento. Digite o número da opção desejada abaixo:",
-            ""
+            "Olá, Seja bem-vindo! Você está no atendimento do grupo São Gabriel, em qual das unidades deseja atendimento. Digite o número da opção desejada abaixo",
+            "",
+            "1 - Arcoverde",
+            "2 - Belo Jardim",
+            "3 - Buíque",
+            "4 - Caruaru",
+            "5 - Garanhuns",
+            "6 - Gravatá",
+            "7 - Pesqueira",
+            "8 - Santa Cruz",
+            "9 - Toritama"
         ])
-        options = {k: v for k, v in menu_tree.items() if '.' not in k}
-        message.extend(format_menu_options(options))
     else:
         current_node = navigate_menu(menu_tree, current_path)
         if current_node and isinstance(current_node, dict):
@@ -47,11 +54,12 @@ def get_menu_message(menu_tree, current_path):
             
             if next_level:
                 message.extend(format_menu_options(next_level))
-    
-    message.extend([
-        "",
-        "0 - Voltar ao menu principal"
-    ])
+            
+            # Adiciona opção de voltar apenas para submenus
+            message.extend([
+                "",
+                "0 - Voltar ao menu principal"
+            ])
     
     return "\n".join(message)
 
