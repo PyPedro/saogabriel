@@ -5,6 +5,27 @@ import time
 
 twilio_bp = Blueprint('twilio_bp', __name__, url_prefix='')
 
+def get_option_by_text(menu_tree, text):
+    """Encontra a opção do menu pelo texto ou número"""
+    text = text.lower().strip()
+    
+    # Mapeamento de textos para números
+    text_to_number = {
+        'arcoverde': '1',
+        'belo jardim': '2',
+        'buíque': '3',
+        'caruaru': '4',
+        'garanhuns': '5',
+        'gravatá': '6',
+        'pesqueira': '7',
+        'santa cruz': '8',
+        'toritama': '9'
+    }
+    
+    if text in text_to_number:
+        return text_to_number[text]
+    return text
+
 def navigate_menu(menu_tree, path):
     """Navega pela árvore do menu e retorna o nó atual"""
     current = menu_tree
@@ -63,6 +84,27 @@ def get_menu_message(menu_tree, current_path):
     
     return "\n".join(message)
 
+def get_option_by_text(menu_tree, text):
+    """Encontra a opção do menu pelo texto ou número"""
+    text = text.lower().strip()
+    
+    # Mapeamento de textos para números
+    text_to_number = {
+        'arcoverde': '1',
+        'belo jardim': '2',
+        'buíque': '3',
+        'caruaru': '4',
+        'garanhuns': '5',
+        'gravatá': '6',
+        'pesqueira': '7',
+        'santa cruz': '8',
+        'toritama': '9'
+    }
+    
+    if text in text_to_number:
+        return text_to_number[text]
+    return text
+
 @twilio_bp.route('/whatsapp/webhook', methods=['POST'])
 def whatsapp_webhook():
     menu_tree = current_app.config['MENU_TREE']
@@ -79,6 +121,40 @@ def whatsapp_webhook():
         resp = MessagingResponse()
         resp.message(get_menu_message(menu_tree, []))
         return str(resp)
+    
+    # Processa entrada do usuário (número ou texto)
+    option = get_option_by_text(menu_tree, body)
+    
+    if option == '1':  # Arcoverde
+        path[:] = ['1']  # Limpa o caminho e define como Arcoverde
+        resp = MessagingResponse()
+        resp.message(get_menu_message(menu_tree, path))
+        return str(resp)
+    
+    # Processa outras opções
+    if re.match(r'^\d+(?:\.\d+)*$', option):
+        if not path:  # No menu principal
+            if option in menu_tree:
+                path.append(option)
+        else:
+            # Adiciona a nova opção ao caminho atual
+            full_option = f"{path[-1]}.{option}"
+            if full_option in menu_tree:
+                path.append(full_option)
+    
+    # Gera resposta
+    resp = MessagingResponse()
+    resp.message(get_menu_message(menu_tree, path))
+    
+    # Emite evento SocketIO para o dashboard
+    current_app.socketio.emit('newMessage', {
+        'conv_id': from_number,
+        'from': from_number,
+        'body': body,
+        'timestamp': int(time.time())
+    })
+    
+    return str(resp)
     
     # Processa entrada numérica (navegação do menu)
     if re.match(r'^\d+(?:\.\d+)*$', body):
