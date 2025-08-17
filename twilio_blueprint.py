@@ -204,12 +204,12 @@ def whatsapp_webhook():
             if option == '1':  # Clínica São Gabriel
                 path.append(option)
                 return str(MessagingResponse().message("\n".join([
-                    "1️⃣ Agendamento de Consultas",
-                    "2️⃣ Agendamento de Consultas (Dr Oscar Barreto)",
-                    "3️⃣ Endoscopia e Colonoscopia",
-                    "4️⃣ Resultado de exames",
-                    "5️⃣ Falar com atendente",
-                    "0️⃣ Retornar ao menu anterior"
+                    "1-Agendamento de Consultas",
+                    "2-Agendamento de Consultas (Dr Oscar Barreto)",
+                    "3-Endoscopia e Colonoscopia",
+                    "4-Resultado de Exames",
+                    "5-Falar com Atendente",
+                    "0-Retornar ao menu anterior"
                 ])))
             elif option == '2':  # Cartão São Gabriel
                 path.append(option)
