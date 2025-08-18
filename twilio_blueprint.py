@@ -3,7 +3,7 @@ from twilio.twiml.messaging_response import MessagingResponse
 import re
 import time
 
-twilio_bp = Blueprint('twilio_bp', __name__, url_prefix='')refix='')
+twilio_bp = Blueprint('twilio_bp', __name__, url_prefix='')
 
 def get_menu_message(current_path):
     """Gera a mensagem do menu com as opções disponíveis"""
