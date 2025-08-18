@@ -155,6 +155,12 @@ def whatsapp_webhook():
     user_session = session.setdefault(from_number, {'path': []})
     path = user_session['path']
     
+    # Se for a primeira mensagem ou o caminho estiver vazio, mostra o menu principal
+    if not path:
+        resp = MessagingResponse()
+        resp.message(get_menu_message([]))
+        return str(resp)
+    
     # Reinicia navegação se solicitado
     if body.lower() in ['menu', 'start', 'iniciar']:
         path.clear()
