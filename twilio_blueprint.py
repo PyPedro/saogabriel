@@ -146,14 +146,25 @@ def get_option_by_text(text):
         return text_to_number[text]
     return text
 
-@twilio_bp.route('/whatsapp/webhook', methods=['POST'])
+@twilio_bp.route('/whatsapp/webhook', methods=['GET', 'POST'])
 def whatsapp_webhook():
+    # Se for uma requisição GET, retorna o menu inicial
+    if request.method == 'GET':
+        resp = MessagingResponse()
+        resp.message(get_menu_message([]))
+        return str(resp)
     from_number = request.form.get('From', '')
     body = request.form.get('Body', '').strip()
     
     # Inicializa ou obtém a sessão do usuário
     user_session = session.setdefault(from_number, {'path': []})
     path = user_session['path']
+    
+    # Se for uma mensagem inicial ou vazia, mostra o menu principal
+    if not body or body.isspace():
+        resp = MessagingResponse()
+        resp.message(get_menu_message([]))
+        return str(resp)
     
     # Processa entrada do usuário (número ou texto)
     option = get_option_by_text(body)
@@ -178,17 +189,18 @@ def whatsapp_webhook():
             resp.message(get_menu_message([]))
             return str(resp)
     
-    # Se não houver caminho, considera como menu principal
+    # Se não houver caminho ativo, estamos no menu principal
     if not path:
+        # Se for uma opção válida (1-9), mostra o submenu correspondente
         if re.match(r'^[1-9]$', option):
             path[:] = [option]  # Define a nova opção
             resp = MessagingResponse()
             resp.message(get_menu_message(path))
             return str(resp)
         else:
-            # Se não for opção válida, mostra o menu principal
+            # Se não for uma opção válida, mostra o menu principal novamente
             resp = MessagingResponse()
-            resp.message(get_menu_message([]))
+            resp.message("Opção inválida. Por favor, escolha uma das opções abaixo:\n\n" + get_menu_message([]))
             return str(resp)
     
     # Processa opções dos submenus
