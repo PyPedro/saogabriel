@@ -3,7 +3,7 @@ from twilio.twiml.messaging_response import MessagingResponse
 import re
 import time
 
-twilio_bp = Blueprint('twilio_bp', __name__, url_prefix='')
+twilio_bp = Blueprint('twilio_bp', __name__, url_prefix='')refix='')
 
 def get_menu_message(current_path):
     """Gera a mensagem do menu com as opções disponíveis"""
@@ -13,59 +13,59 @@ def get_menu_message(current_path):
         return "\n".join([
             "Olá, Seja bem-vindo! Você está no atendimento do grupo São Gabriel, em qual das unidades deseja atendimento. Digite o número da opção desejada abaixo:",
             "",
-            "1️⃣ Arcoverde",
-            "2️⃣ Belo Jardim",
-            "3️⃣ Buíque",
-            "4️⃣ Caruaru",
-            "5️⃣ Garanhuns",
-            "6️⃣ Gravatá",
-            "7️⃣ Pesqueira",
-            "8️⃣ Santa Cruz",
-            "9️⃣ Toritama"
+            "1 Arcoverde",
+            "2 Belo Jardim",
+            "3 Buíque",
+            "4 Caruaru",
+            "5 Garanhuns",
+            "6 Gravatá",
+            "7 Pesqueira",
+            "8 Santa Cruz",
+            "9 Toritama"
         ])
     
     # Menu de Arcoverde
     if len(current_path) == 1 and current_path[0] == '1':
         return "\n".join([
-            "1️⃣ Agendamento de consultas/exames",
-            "2️⃣ Cartão São Gabriel",
-            "3️⃣ 2ª via de boleto",
-            "4️⃣ Guia Médico",
-            "5️⃣ Falar com atendente",
-            "0️⃣ Retornar ao menu principal"
+            "1 Agendamento de consultas/exames",
+            "2 Cartão São Gabriel",
+            "3 2ª via de boleto",
+            "4 Guia Médico",
+            "5 Falar com atendente",
+            "0 Retornar ao menu principal"
         ])
     
     # Menu de Belo Jardim
     if len(current_path) == 1 and current_path[0] == '2':
         return "\n".join([
-            "1️⃣ Agendamento de consultas/exames",
-            "2️⃣ Cartão São Gabriel",
-            "3️⃣ 2ª via de boleto",
-            "4️⃣ Guia Médico",
-            "5️⃣ Falar com atendente",
-            "0️⃣ Retornar ao menu principal"
+            "1 Agendamento de consultas/exames",
+            "2 Cartão São Gabriel",
+            "3 2ª via de boleto",
+            "4 Guia Médico",
+            "5 Falar com atendente",
+            "0 Retornar ao menu principal"
         ])
     
     # Menu de Buíque
     if len(current_path) == 1 and current_path[0] == '3':
         return "\n".join([
-            "1️⃣ Falar com atendente",
-            "2️⃣ Guia Médico",
-            "3️⃣ Falar com atendente",
-            "0️⃣ Retornar ao menu principal"
+            "1 Falar com atendente",
+            "2 Guia Médico",
+            "3 Falar com atendente",
+            "0 Retornar ao menu principal"
         ])
     
     # Menu de Caruaru
     if len(current_path) == 1 and current_path[0] == '4':
         return "\n".join([
-            "1️⃣ Clinica São Gabriel",
-            "2️⃣ Cartão São Gabriel",
-            "3️⃣ Laboratório",
-            "4️⃣ Exames Imagens (Rx, Tomografia, Ultrassonografia)",
-            "5️⃣ Hospital",
-            "6️⃣ Fisioterapia",
-            "7️⃣ Remoção (Ambulância)",
-            "0️⃣ Retornar ao menu principal"
+            "1 Clinica São Gabriel",
+            "2 Cartão São Gabriel",
+            "3 Laboratório",
+            "4 Exames Imagens (Rx, Tomografia, Ultrassonografia)",
+            "5 Hospital",
+            "6 Fisioterapia",
+            "7 Remoção (Ambulância)",
+            "0 Retornar ao menu principal"
         ])
     
     # Menu de Garanhuns
@@ -197,8 +197,7 @@ def whatsapp_webhook():
                     "5-Falar com Atendente",
                     "0-Retornar ao menu anterior"
                 ]
-                return str(MessagingResponse().message("\n".join(menu)
-                ))
+                return str(MessagingResponse().message("\n".join(menu)))
             elif option == '2':  # Cartão São Gabriel
                 path.append(option)
                 return str(MessagingResponse().message("\n".join([
@@ -270,41 +269,41 @@ def whatsapp_webhook():
                 if option == '4':  # Outros
                     path.append(option)
                     return str(MessagingResponse().message("\n".join([
-                        "1️⃣ Coletas Domiciliares",
-                        "2️⃣ Solicitação de Urgência nos laudos",
-                        "3️⃣ Falar com atendente",
-                        "0️⃣ Retornar ao menu anterior"
+                        "1 Coletas Domiciliares",
+                        "2 Solicitação de Urgência nos laudos",
+                        "3 Falar com atendente",
+                        "0 Retornar ao menu anterior"
                     ])))
             elif path[1] == '5':  # Submenu Hospital
                 if option == '1':  # Recepção
                     path.append(option)
                     return str(MessagingResponse().message("\n".join([
-                        "1️⃣ Clinica médica/ Ortopedia",
-                        "2️⃣ Exames de imagens (Tomografia/RX)",
-                        "3️⃣ Exames Laboratoriais",
-                        "4️⃣ Orçamentos de cirurgias",
-                        "5️⃣ Cadastro de Guias",
-                        "6️⃣ Falar com atendente",
-                        "0️⃣ Retornar ao menu anterior"
+                        "1 Clinica médica/ Ortopedia",
+                        "2 Exames de imagens (Tomografia/RX)",
+                        "3 Exames Laboratoriais",
+                        "4 Orçamentos de cirurgias",
+                        "5 Cadastro de Guias",
+                        "6 Falar com atendente",
+                        "0 Retornar ao menu anterior"
                     ])))
                 elif option == '2':  # Marcação de consultas eletivas
                     return str(MessagingResponse().message("Para agilizar seu atendimento, por favor, informe seu nome completo."))
                 elif option == '3':  # Autorizações de convênios
                     path.append(option)
                     return str(MessagingResponse().message("\n".join([
-                        "1️⃣ Cirurgias",
-                        "2️⃣ Infiltrações",
-                        "3️⃣ Falar com atendente",
-                        "0️⃣ Retornar ao menu anterior"
+                        "1 Cirurgias",
+                        "2 Infiltrações",
+                        "3 Falar com atendente",
+                        "0 Retornar ao menu anterior"
                     ])))
                 elif option == '4':  # Financeiro
                     path.append(option)
                     return str(MessagingResponse().message("\n".join([
-                        "1️⃣ Valores de contas à pagar",
-                        "2️⃣ Nota Fiscal (Meu IRPF)",
-                        "3️⃣ Valores de Procedimentos",
-                        "4️⃣ Falar com Atendente",
-                        "0️⃣ Retornar ao menu anterior"
+                        "1 Valores de contas à pagar",
+                        "2 Nota Fiscal (Meu IRPF)",
+                        "3 Valores de Procedimentos",
+                        "4 Falar com Atendente",
+                        "0 Retornar ao menu anterior"
                     ])))
                 elif option == '5':  # Prontuário DPVAT
                     return str(MessagingResponse().message("\n".join([
