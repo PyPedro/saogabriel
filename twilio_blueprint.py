@@ -155,11 +155,8 @@ def whatsapp_webhook():
     user_session = session.setdefault(from_number, {'path': []})
     path = user_session['path']
     
-    # Se for a primeira mensagem ou o caminho estiver vazio, mostra o menu principal
-    if not path:
-        resp = MessagingResponse()
-        resp.message(get_menu_message([]))
-        return str(resp)
+    # Processa entrada do usuário (número ou texto)
+    option = get_option_by_text(body)
     
     # Reinicia navegação se solicitado
     if body.lower() in ['menu', 'start', 'iniciar']:
@@ -173,24 +170,29 @@ def whatsapp_webhook():
         if path:
             path.pop()  # Remove o último nível do caminho
             resp = MessagingResponse()
-            if not path:
-                resp.message(get_menu_message([]))  # Volta ao menu principal
-            else:
-                resp.message(get_menu_message(path))  # Mostra menu atual
+            resp.message(get_menu_message(path))  # Mostra menu atual
+            return str(resp)
+        else:
+            # Se já estiver no menu principal, mostra ele novamente
+            resp = MessagingResponse()
+            resp.message(get_menu_message([]))
             return str(resp)
     
-    # Processa entrada do usuário (número ou texto)
-    option = get_option_by_text(body)
-    
-    # Se for uma opção válida do menu principal (1-9)
-    if re.match(r'^[1-9]$', option):
-        path[:] = [option]  # Limpa o caminho e define a nova opção
-        resp = MessagingResponse()
-        resp.message(get_menu_message(path))
-        return str(resp)
+    # Se não houver caminho, considera como menu principal
+    if not path:
+        if re.match(r'^[1-9]$', option):
+            path[:] = [option]  # Define a nova opção
+            resp = MessagingResponse()
+            resp.message(get_menu_message(path))
+            return str(resp)
+        else:
+            # Se não for opção válida, mostra o menu principal
+            resp = MessagingResponse()
+            resp.message(get_menu_message([]))
+            return str(resp)
     
     # Processa opções dos submenus
-    if re.match(r'^\d+$', option) and path:
+    if re.match(r'^\d+$', option):
         # Submenus de Caruaru
         if path == ['4']:
             if option == '1':  # Clínica São Gabriel
